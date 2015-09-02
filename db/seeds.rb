@@ -19,6 +19,9 @@ posts = Post.all
     )
 end
 
+# Unique post
+Post.find_or_create_by!(title: "My custom Post", body: "My custom body")
+
 puts "Seed finished"
 puts "#{Post.count} Posts created"
 puts "#{Comment.count} Comments created"
