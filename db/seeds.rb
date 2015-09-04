@@ -1,10 +1,22 @@
 include RandomData
 
+# Create Topics
+
+15.times do
+  Topic.create!(
+      name: RandomData.random_sentence,
+      description: RandomData.random_paragraph
+    )
+end
+
+topics = Topic.all
+
 # Create Posts
 50.times do
   Post.create!(
       title: RandomData.random_sentence,
-      body: RandomData.random_paragraph
+      body: RandomData.random_paragraph,
+      topic: topics.sample
     )
 end
 
@@ -23,5 +35,6 @@ end
 Post.find_or_create_by!(title: "My custom Post", body: "My custom body")
 
 puts "Seed finished"
+puts "#{Topic.count} Topics created"
 puts "#{Post.count} Posts created"
 puts "#{Comment.count} Comments created"

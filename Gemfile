@@ -51,6 +51,9 @@ group :development, :test do
 
   # RSpec for testing
   gem 'rspec-rails', '~> 3.0'
+
+  # Shoulda for association matchers
+  gem 'shoulda-matchers'
 end
 
 # Bootstrap

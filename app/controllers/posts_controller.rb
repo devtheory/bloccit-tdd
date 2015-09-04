@@ -1,21 +1,20 @@
 class PostsController < ApplicationController
-  def index
-    @posts = Post.all
-  end
 
   def show
     @post = Post.find(params[:id])
   end
 
   def new
-    @post = Post.new
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.build(post_params)
 
     if @post.save
-      redirect_to @post, notice: "Post created successfully!"
+      redirect_to [@topic, @post], notice: "Post created successfully!"
     else
       flash[:error] = "Something went wrong"
       render :new
@@ -23,14 +22,16 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:id])
   end
 
   def update
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
 
     if @post.update_attributes(post_params)
-      redirect_to @post, notice: "Post updated!"
+      redirect_to [@topic, @post], notice: "Post updated!"
     else
       flash[:error] = "Something went wrong"
       render :edit
@@ -38,10 +39,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @topic = Topic.find(params[:topic_id])
+    @post = @topic.posts.find(params[:id])
 
     if @post.destroy
-      redirect_to posts_path, notice: "Post deleted successfully!"
+      redirect_to @topic, notice: "Post deleted successfully!"
     else
       flash[:error] = "Post failed to delete"
       render :show
