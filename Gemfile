@@ -58,3 +58,4 @@ end
 
 # Bootstrap
 gem 'bootstrap-sass'
+gem 'bcrypt'
