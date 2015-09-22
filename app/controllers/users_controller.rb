@@ -15,6 +15,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def confirm
+    @user = User.new(user_params)
+  end
+
   private
 
   def user_params
