@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      create_session(@user)
       redirect_to root_path, notice: "Welcome to Bloccit, #{@user.name}!"
     else
       flash[:error] = "There was an error creating your account. Please try again."
