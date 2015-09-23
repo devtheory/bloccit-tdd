@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SponsoredPost, type: :model do
   
-  let(:topic) { Topic.create!(name: "a topic name", description: "a topic body")}
+  let(:topic) { Topic.create!(name: "a topic name", description: "a topic body that meets validation")}
   let(:sponsored_post) { SponsoredPost.create!(title: "a sponsored post title", body: "a sponsored body", topic: topic)}
 
   it {should belong_to(:topic)}

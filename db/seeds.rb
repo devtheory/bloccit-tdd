@@ -1,5 +1,19 @@
 include RandomData
 
+# Create Users
+
+5.times do
+  user = User.create!(
+    name: RandomData.random_name, 
+    email: RandomData.random_email, 
+    password: RandomData.random_sentence
+  )
+end
+
+users = User.all
+
+users.first.update_attributes!(email: "admin@example.com", password: "password")
+
 # Create Topics
 
 15.times do
@@ -16,7 +30,8 @@ topics = Topic.all
   Post.create!(
       title: RandomData.random_sentence,
       body: RandomData.random_paragraph,
-      topic: topics.sample
+      topic: topics.sample,
+      user: users.sample
     )
 end
 
@@ -35,6 +50,7 @@ end
 Post.find_or_create_by!(title: "My custom Post", body: "My custom body")
 
 puts "Seed finished"
+puts "#{User.count} users created"
 puts "#{Topic.count} Topics created"
 puts "#{Post.count} Posts created"
 puts "#{Comment.count} Comments created"
