@@ -12,7 +12,8 @@ end
 
 users = User.all
 
-users.first.update_attributes!(email: "admin@example.com", password: "password")
+users.first.update_attributes!(email: "admin@example.com", password: "password", role: 'admin')
+users.last.update_attributes!(email: "member@example.com", password: "password", role: 'member')
 
 # Create Topics
 
