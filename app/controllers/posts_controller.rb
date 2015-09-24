@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
+      @post.labels = Label.update_labels(params[:post][:labels])
       redirect_to [@topic, @post], notice: "Post created successfully!"
     else
       flash[:error] = "Something went wrong"
@@ -34,6 +35,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     if @post.update_attributes(post_params)
+      @post.labels = Label.update_labels(params[:post][:labels])
       redirect_to [@topic, @post], notice: "Post updated!"
     else
       flash[:error] = "Something went wrong"

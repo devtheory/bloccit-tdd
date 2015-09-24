@@ -5,8 +5,12 @@
   </small>
 </h1>
 <div class="row">
-  <div c;ass="col-md-8">
-    <p><%= @post.body %></p>
+  <div class="col-md-8">
+    <p>
+      <%= render partial: "labels/list", locals: {labels: @post.labels} %>
+      <br />
+      <%= @post.body %>
+    </p>
   </div>
   <% if user_is_authorized_for_post?(@post) %>
     <div class="col-md-4">
