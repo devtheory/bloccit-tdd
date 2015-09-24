@@ -6,10 +6,13 @@ class Post < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
+  has_many :ratings, as: :rateable
+  has_many :labels, through: :labelings
+
   validates :title, length: {minimum: 5}, presence: true
-  validates :body, length: {minimum: 20}, presence: true
-  validates :topic, presence: true
-  validates :user, presence: true
+  #validates :body, length: {minimum: 20}, presence: true
+  # validates :topic, presence: true
+  # validates :user, presence: true
 
   default_scope {order('created_at DESC')}
 end

@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1>Rate: <%= @rate.severity %></h1>
+    <% @rate.topics.each do |topic| %>
+      <div>
+        Topic: <%= link_to topic.name, topic %>
+      </div>
+    <% end %>
+
+    <% @rate.posts.each do |post| %>
+      <div>
+        Post: <%= link_to post.title, [post.topic, post] %>
+      </div>
+    <% end %>
+  </div>
+</div>

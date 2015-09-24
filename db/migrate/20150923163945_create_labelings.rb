@@ -5,8 +5,8 @@ class CreateLabelings < ActiveRecord::Migration
       # t.integer :topic_id
 
       t.references :label, index: true, foreign_key: true
-      t.references :topic, index: true, foreign_key: true
-      t.references :post, index: true, foreign_key: true
+      #t.references :topic, index: true, foreign_key: true
+      #t.references :post, index: true, foreign_key: true
 
       t.references :labelable, polymorphic: true, index: true
     end

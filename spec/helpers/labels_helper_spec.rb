@@ -11,7 +11,7 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe LabelsHelper, type: :helper do
-  describle "lables_to_buttons" do
+  describe "lables_to_buttons" do
     it "turns labels into HTML buttons" do
       L1 = Label.create!(name: "L1")
       L2 = Label.create!(name: "L2")

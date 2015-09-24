@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
 
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
+      @topic.rates = Rate.update_rates(params[:topic][:rates])
       redirect_to @topic, notice: "Topic created successfully!"
     else
       flash[:error] = "Something went wrong"
@@ -35,6 +36,7 @@ class TopicsController < ApplicationController
 
     if @topic.update_attributes(topic_params)
       @topic.labels = Label.update_labels(params[:topic][:labels])
+      @topic.rates = Rate.update_rates(params[:topic][:rates])
       redirect_to @topic, notice: "Topic updated successfully!"
     else
       flash[:error] = "Something went wrong!"

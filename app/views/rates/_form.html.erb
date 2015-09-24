@@ -1,0 +1,4 @@
+<div class="form-group">
+  <%= f.label :rates %>
+  <%= f.text_field :rates, class: 'form-control', placeholder: "Enter rates separated by commas", value: rates.map(&:severity).join(', ') %>
+</div>

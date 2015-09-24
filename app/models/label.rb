@@ -6,6 +6,7 @@ class Label < ActiveRecord::Base
 
   def self.update_labels(label_string)
     new_labels = []
+    return new_labels if label_string == ""
 
     unless label_string.nil? || label_string.empty?
       label_string.split(",").each do |label|
