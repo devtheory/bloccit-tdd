@@ -12,8 +12,8 @@ end
 
 users = User.all
 
-users.first.update_attributes!(email: "admin@example.com", password: "password", role: 'admin')
-users.last.update_attributes!(email: "member@example.com", password: "password", role: 'member')
+users.first.update_attributes!(email: "admin@example.com", password: "password", role: 'admin', name: "Admin user")
+users.last.update_attributes!(email: "member@example.com", password: "password", role: 'member', name: "Member user")
 
 # Create Topics
 
@@ -43,12 +43,10 @@ posts = Post.all
 100.times do
   Comment.create!(
       body: RandomData.random_paragraph,
-      post: posts.sample
+      post: posts.sample,
+      user: users.sample
     )
 end
-
-# Unique post
-Post.find_or_create_by!(title: "My custom Post", body: "My custom body")
 
 puts "Seed finished"
 puts "#{User.count} users created"
