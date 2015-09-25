@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      @post.labels = Label.update_labels(params[:post][:labels])
+      @post.labels = Label.update_labels(params[:post][:labels]) unless params[:post][:labels].empty?
       redirect_to [@topic, @post], notice: "Post created successfully!"
     else
       flash[:error] = "Something went wrong"
