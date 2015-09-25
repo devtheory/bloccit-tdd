@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
 
   it {should have_many(:posts)}
   it {should have_many(:comments)}
+  it {should have_many(:votes)}
 
   #validations
   it {should validate_presence_of(:name)}
@@ -75,19 +76,19 @@ RSpec.describe User, type: :model do
   end
 
   #methods
-  context "user methods" do
-    describe "#format_name" do
-      it "uses proper name capitalization for lowercased names" do
-        user_with_lowercase_name = User.new(name: "bloccit user", email: "user@bloccit.com", password: "password")
-        expect(user_with_lowercase_name.name).to eq("bloccit user")
+  # context "user methods" do
+  #   describe "#format_name" do
+  #     it "uses proper name capitalization for lowercased names" do
+  #       user_with_lowercase_name = User.new(name: "bloccit user", email: "user@bloccit.com", password: "password")
+  #       expect(user_with_lowercase_name.name).to eq("bloccit user")
 
-        user_with_lowercase_name.save
+  #       user_with_lowercase_name.save
 
-        expect(user_with_lowercase_name.name).to eq("Bloccit User")
-      end
+  #       expect(user_with_lowercase_name.name).to eq("Bloccit User")
+  #     end
 
-    end
-  end
+  #   end
+  # end
 
   describe "invalid user" do
     let(:user_with_invalid_name) {User.new(name: "", email: "user@bloccit.com")}
