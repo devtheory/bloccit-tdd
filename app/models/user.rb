@@ -30,6 +30,14 @@ class User < ActiveRecord::Base
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
+  def favorited_posts
+    posts = []
+    favorites.each do |favorite|
+      posts << favorite.post
+    end
+    posts
+  end
+
   # private
 
   # def format_name

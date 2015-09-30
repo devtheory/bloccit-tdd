@@ -136,4 +136,14 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#favorited_posts" do
+    before do
+      @post = create(:post)
+      Favorite.create!(user: user, post: @post)
+    end
+    it "returns an array of all the posts the user has favorited" do
+      expect(user.favorited_posts).to eq([@post])
+    end
+  end
+
 end
