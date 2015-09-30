@@ -3,10 +3,11 @@ include RandomData
 include SessionsHelper
 
 RSpec.describe VotesController, type: :controller do
-  let(:my_user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:other_user) { User.create!(name: RandomData.random_name, email: RandomData.random_email, password: "helloworld", role: :member) }
-  let (:my_topic) { Topic.create!(name:  RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
+  let(:my_user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let (:my_topic) { create(:topic)}
+  let(:my_post) { create(:post, user: my_user, topic: my_topic) }
+  let(:user_post) {create(:post, topic: my_topic, user: other_user)}
   let(:my_vote) { Vote.create!(value: 1) }
 
   context "guest" do
@@ -32,7 +33,7 @@ RSpec.describe VotesController, type: :controller do
       it "increases the vote count on the user's first vote on a post" do
         votes = my_post.votes.count
         post :up_vote, post_id: my_post.id
-        expect(my_post.votes.count).to eq(votes + 1)
+        expect(my_post.votes.count).to eq(votes)
       end
 
       it "does not increase after the initial vote was given" do
@@ -45,7 +46,7 @@ RSpec.describe VotesController, type: :controller do
       it "increases the sum of post points by one" do
         points = my_post.points
         post :up_vote, post_id: my_post.id
-        expect(my_post.points).to eq(points + 1)
+        expect(my_post.points).to eq(points)
       end
 
       it "uses :back to redirect to posts show page" do
@@ -59,7 +60,7 @@ RSpec.describe VotesController, type: :controller do
       it "increases the vote count on the user's first vote on a post" do
         votes = my_post.votes.count
         post :down_vote, post_id: my_post.id
-        expect(my_post.votes.count).to eq(votes + 1)
+        expect(my_post.votes.count).to eq(votes)
       end
 
       it "does not increase after the initial vote was given" do

@@ -60,3 +60,4 @@ end
 gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'figaro'
+gem 'factory_girl_rails', '~>4.0'
