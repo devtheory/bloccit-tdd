@@ -1,4 +1,4 @@
-<h1><%= @topic.name %></h1>
+<h1><%= @topic.name %><small> <%= "Private" if !@topic.public %></small></h1>
 
 <% if user_is_authorized_for_topics? %>
   <%= link_to "Edit Topic", edit_topic_path(@topic), class: 'btn btn-success' %>

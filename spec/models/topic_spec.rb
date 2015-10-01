@@ -3,6 +3,7 @@ include RandomData
 
 RSpec.describe Topic, type: :model do
   let(:topic) { create(:topic)}
+  let(:private_topic) { create(:topic, public: false)}
 
   it { should have_many(:posts)}
   it {should have_many(:labelings)}
@@ -33,19 +34,26 @@ RSpec.describe Topic, type: :model do
   end
 
   describe "scopes" do
-    before do
-      @public_topic = create(:topic)
-      @private_topic = create(:topic, public: false)
-    end
-
     describe "visible_to(user)" do
       it "returns all topics if user is signed in" do
         user = User.new
-        expect(Topic.visible_to(user)).to eq([@public_topic, @private_topic])
+        expect(Topic.visible_to(user)).to eq([topic, private_topic])
       end
 
       it "returns only public topics if there is no user" do
-        expect(Topic.visible_to(nil)).to eq([@public_topic])
+        expect(Topic.visible_to(nil)).to eq([topic])
+      end
+    end
+
+    describe "publicly_viewable" do
+      it "returns a collection of only public topics" do
+        expect(Topic.publicly_viewable).to eq([topic])
+      end
+    end
+
+    describe "privately_viewable" do
+      it "returns a collection of only private topics" do
+        expect(Topic.privately_viewable).to eq([private_topic])
       end
     end
   end
