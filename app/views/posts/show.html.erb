@@ -16,10 +16,14 @@
       <div>
         <hr>
         <h3>Comments</h3>
-        <%= render @post.comments %>
+        <div id='js-comments'>
+          <%= render @post.comments %>
+        </div>
       </div>
       <% if current_user %>
-        <%= render partial: "comments/form", locals: {post: @post, comment: Comment.new} %>
+        <div id="new-comment">
+          <%= render partial: "comments/form", locals: {post: @post, comment: Comment.new} %>
+        </div>
       <% end %> 
     </p>
   </div>
