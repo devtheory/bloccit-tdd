@@ -1,0 +1,7 @@
+<% if @vote.valid? %>
+  $('#votes-post-' + <%= @post.id %>).html("<%= @post.points %>");
+  $('#post-points').html("<%= pluralize(@post.points, 'point') %>");
+  $('#post-votes').html("<%= pluralize(@post.up_votes, 'up vote') %> <%= pluralize(@post.down_votes, 'down vote') %>");
+<% else %>
+  $('.flash').append("Can't downvote more than once, Slick Rick!")
+<% end %>
